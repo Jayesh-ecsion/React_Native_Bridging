@@ -1,118 +1,120 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { Text, StatusBar, View, StyleSheet,
+ Platform, TouchableOpacity, Image, 
+ SafeAreaView} from 'react-native';
+import { NativeModules } from 'react-native';
+import Bridge_comp from './Components/BridgeComp';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+const { VoiceChangingModule } = NativeModules;
+const App =()=>{
+  return(<SafeAreaView style={{flex:1}}>
+    <Bridge_comp />
+  </SafeAreaView>)
 }
+// const App = () => {
+//   const changeToAlein = () => {
+//     Platform.OS === 'android' && VoiceChangingModule.changeVoiceToAlien("From Native ",(response: any)=>{
+//           console.log(`Response from Android Native ${response}`)
+//     })
+//   };
+//   const saveToSharedPref =()=>{
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+//   }
+//   return (
+//     <View style={styles.container}>
+//       <StatusBar barStyle="dark-content" backgroundColor={'#e4e5ea'} />
+//       <Text style={styles.title}>Voice Changer</Text>
+//       <Text style={styles.title}> Change Voice Effects </Text>
+//       <View style={styles.iconsContainer}>
+//         <TouchableOpacity onPress={() => changeToAlein()}>
+//           <Image
+//             source={{
+//               uri:
+//                 'https://icons.iconarchive.com/icons/google/noto-emoji-smileys/256/10101-alien-icon.png',
+//             }}
+//             resizeMode={'contain'}
+//             style={styles.icon}
+//           />
+//           <Text>Alien</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity onPress={() => saveToSharedPref()}>
+//           <Image
+//             source={{
+//               uri:
+//                 'https://pics.freeicons.io/uploads/icons/png/2793494581535699799-512.png',
+//             }}
+//             resizeMode={'contain'}
+//             style={styles.icon}
+//           />
+//           <Text>Child</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity onPress={() => null}>
+//           <Image
+//             source={{
+//               uri:
+//                 'https://www.pngjoy.com/pngl/346/6457386_black-arrows-fast-forward-symbol-transparent-png-download.png',
+//             }}
+//             resizeMode={'contain'}
+//             style={styles.icon}
+//           />
+//           <Text>Fast</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity onPress={() => null}>
+//           <Image
+//             source={{
+//               uri:
+//                 'https://img.pngio.com/action-motion-play-slow-icon-slow-motion-png-512_512.png',
+//             }}
+//             resizeMode={'contain'}
+//             style={styles.icon}
+//           />
+//           <Text>Slow</Text>
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//   );
+// };
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     backgroundColor: '#e4e5ea',
+//     flex: 1,
+//     paddingTop: 50,
+//     alignItems: 'center',
+//   },
+//   title: {
+//     fontSize: 20,
+//     color: '#000',
+//     marginVertical: 25,
+//   },
+//   iconsContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'space-evenly',
+//     width: '100%',
+//     paddingHorizontal: 50,
+//   },
+//   warningText: {
+//     color: 'red',
+//     fontWeight: 'bold',
+//     letterSpacing: 1.5,
+//     textAlign: 'center',
+//   },
+//   spacing: {
+//     marginVertical: 10,
+//   },
+//   row: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     width: '40%',
+//   },
+//   icon: {
+//     height: 40,
+//     width: 40,
+//     marginBottom: 15,
+//   },
+// });
 
 export default App;
